@@ -29,6 +29,12 @@ jobs:
           neofetch
           df -h
 
+      - name: Cleanup GitHub Actions Cache
+        run: rm -rf ${{ github.workspace }}/_actions
+
+      - name: Check GitHub API Connectivity
+        run: curl -I https://api.github.com
+
       - name: Lets compile
         run: |
           mkdir kernel
@@ -44,13 +50,14 @@ jobs:
           cd ..
           echo "Compile starting..."
           bash build/build.sh
-          echo "Compilied..."
+          echo "Compiled..."
           git clone https://github.com/sarthakroy2002/AnyKernel3 -b android12-5.10 
           cp -r out/android12-5.10/dist/Image.gz AnyKernel3
           cd AnyKernel3
           zip -r9 android12-5.10-AnyKernel3.zip ./*
 
-      - uses: actions/upload-artifact@v3
+      - name: Upload Kernel Artifacts
+        uses: actions/upload-artifact@v4
         with:
           name: android12-5.10 Flashable Zip and Kernel Binary
           path: |
