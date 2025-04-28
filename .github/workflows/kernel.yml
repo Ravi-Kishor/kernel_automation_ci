@@ -62,4 +62,4 @@ jobs:
           name: android12-5.10 Flashable Zip and Kernel Binary
           path: |
             kernel/AnyKernel3/android12-5.10-AnyKernel3.zip
-            kernel/out/android12-5.10/dist/Image.gz
+            #kernel/out/android12-5.10/dist/Image.gz
